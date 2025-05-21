@@ -21,7 +21,7 @@ I grafici dei Blueprint implementati:
 
 3. Il bottone Exit per la chiusura dell'applicazione
 
-![BP_Widget_ButtonExit](https://github.com/user-attachments/assets/29ddca9c-b660-4c99-bff3-1e77e63754c9)
+   ![BP_Widget_ButtonExit](https://github.com/user-attachments/assets/29ddca9c-b660-4c99-bff3-1e77e63754c9)
 
 5. Il bottone Conferma che nasconde il pannello dei metahuman e apre quello per la scelta delle animazioni,
    dell'ambiente e il momento della giornata.
