@@ -14,7 +14,8 @@ I grafici dei Blueprint implementati:
 
 1. Con le frecce direzionali Sx e Dx della tastiera è possibile cambiare la visuale della telecamera.
    Vengono definiti due valori, 0 per la variabile IndexRight e 4 per la variabile Indexleft.
-   IndexRight viene incrementata invece IndexLeft viene decrementata. In base al valore viene cambiata la visuale della telecamera. 
+   IndexRight viene incrementata invece IndexLeft viene decrementata. Con l'input vengono cambiati i valori delle variabili
+   consentendo di muoversi verso destra e verso sinistra.
 ![BP_Widget_Left](https://github.com/user-attachments/assets/2b2ede9e-20d3-4850-9628-0460d0875045)
 ![BP_Widget_Right](https://github.com/user-attachments/assets/a8168176-17e3-41ce-9fdd-5bcf5ef5d240)
 
