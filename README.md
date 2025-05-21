@@ -5,9 +5,11 @@ verso l'autovettura in diverse direzioni, in modo da allenare l'AI a riconoscere
 
 # C++
 1. Metahuman Manager (Guardare file MetahumanManager.h e MetahumanManager.cpp)
+
    Classe usata come "contenitore" per i Metahuman che vengono raggrupati in un array di Character.
 
-2. CPPMenuTekke (Guardare fiel CPPMenuTekke.h e CPPMenuTekke.cpp)
+3. CPPMenuTekke (Guardare fiel CPPMenuTekke.h e CPPMenuTekke.cpp)
+
    Classe che implementa la logica dell'applicazione. L'utente sceglie inizialemente un Metahuman da utilizzare,
    sceglie l'ambiente urbano o residenziale, il momento della giornata (Mattino, Giorno, Sera) e la visuale della telecamera.
    In fine scegliendo l'animazione il Metahuman inizia a camminare verso l'autovettura.  
