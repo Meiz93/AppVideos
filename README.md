@@ -5,15 +5,16 @@ verso l'autovettura in diverse direzioni, in modo da allenare l'AI a riconoscere
 
 # C++
 1. Metahuman Manager (Guardare file MetahumanManager.h e MetahumanManager.cpp)
-   Classe usata come "contenitore" per i Metahuman che vengono raggrupati in un array di Character.
+   Classe usata come "contenitore" per i Metahuman che vengono raggrupati in un array di Character, dalla quale deriva la classe Blueprint
+   BP_MetahumanManager che è stata istanziata nella scena.
    
 3. CPPMenuTekke (Guardare fiel CPPMenuTekke.h e CPPMenuTekke.cpp)
-   Classe che implementa la logica dell'applicazione. L'utente sceglie inizialemente un Metahuman da utilizzare,
-   sceglie l'ambiente urbano o residenziale, il momento della giornata (Mattino, Giorno, Sera) e la visuale della telecamera.
-   In fine scegliendo l'animazione il Metahuman inizia a camminare verso l'autovettura.  
+   Classe che implementa la logica dell'applicazione dalla quale deriva la classe Blueprint del Widget BPWidegt_CPPMenuTekken.
+   L'utente sceglie inizialemente un Metahuman da utilizzare, sceglie l'ambiente urbano o residenziale, il momento della giornata (Mattino, Giorno, Sera)
+   e la visuale della telecamera. In fine scegliendo l'animazione il Metahuman inizia a camminare verso l'autovettura.  
 
 # Blueprint
-I grafici dei Blueprint implementati:
+Blueprint Graph:
 1. Nel momento in cui viene creato il Widget viene nascosto il pannello delle animazioni,
    viene eseguito i cast per le telecamere, directional light, sky light e SM_SkyLight e imposta
    a quest'ultime il colori per simulare il mattino.
