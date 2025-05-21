@@ -1,7 +1,7 @@
 # AppVideos
 Il progetto nel complesso ha come obiettivo di creare un'autovettura con l'AI integrata capace di aprirsi riconoscendo il proprietario.
-L'applicazione ha come scopo quello di creare dei video che verrano utilizzati per l'allenamento dell'AI.
-Nell'applicazione verrà simulato il passaggio del proprietario verso all'autovettura in diverse angolazioni.
+Per il training di questa AI bisogna avere un dataset di video, questo è lo scopo dell'applicazione ovvero creare video di persone che camminano
+verso l'autovettura in diverse direzioni, in modo da allenare l'AI a riconoscere il proprietario.
 
 # Blueprint
 I grafici dei Blueprint implementati:
@@ -10,7 +10,6 @@ I grafici dei Blueprint implementati:
    a quest'ultime il colori per simulare il mattino.
 ![BP_Widget_EventConstruct](https://github.com/user-attachments/assets/c69eaf18-433e-4383-aa65-d33e850ea8fe)
 ![BP_Widget_EventConstruct2](https://github.com/user-attachments/assets/e7ea8a98-0b6c-4128-a1b0-37636506f1cf)
-
 
 1. Con le frecce direzionali Sx e Dx della tastiera è possibile cambiare la visuale della telecamera.
    Vengono definiti due valori, 0 per la variabile IndexRight e 4 per la variabile Indexleft.
