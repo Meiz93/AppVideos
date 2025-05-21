@@ -14,7 +14,7 @@ verso l'autovettura in diverse direzioni, in modo da allenare l'AI a riconoscere
    L'utente sceglie inizialemente un Metahuman da utilizzare, sceglie l'ambiente urbano o residenziale, il momento della giornata (Mattino, Giorno, Sera)
    e la visuale della telecamera. In fine scegliendo l'animazione il Metahuman inizia a camminare verso l'autovettura.  
 
-# Blueprint Graph:
+# Classe Blueprint BPWidegt_CPPMenuTekke:
 1. Nel momento in cui viene creato il Widget viene nascosto il pannello delle animazioni,
    viene eseguito i cast per le telecamere, directional light, sky light e SM_SkyLight e imposta
    a quest'ultime il colori per simulare il mattino.
