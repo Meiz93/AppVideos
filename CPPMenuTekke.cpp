@@ -93,19 +93,13 @@ void UCPPMenuTekke::OnClickedWalk_1()
     
     if (CheckPosition != TPPos)
     {
-        //MetahumanActiveRef->SetActorLocationAndRotation(Pos, Rot);
         SkeletalMeshComponent->Stop();
         AIController->StopMovement();
-        UE_LOG(LogTemp, Warning, TEXT("la pos è: %s"), *MetahumanActiveRef->GetActorLocation().ToString());
-        //MetahumanActiveRef->SetActorLocationAndRotation(RightCameraPosition, FRotator(0.0f, 100.0f, 0.0f));
-        // LogTemp: Warning: la pos : X=-3528.000 Y=677.000 Z=90.000
-        // LogTemp: Warning: la pos : X = -3322.491 Y = 50.289 Z = 90.000
         SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
         AIController->MoveToActor(TargetPoint);
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("la pos è: %s"), *MetahumanActiveRef->GetActorLocation().ToString());
         SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
         AIController->MoveToActor(TargetPoint);
     }
