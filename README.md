@@ -20,13 +20,14 @@ I grafici dei Blueprint implementati:
 ![BP_Widget_Right](https://github.com/user-attachments/assets/a8168176-17e3-41ce-9fdd-5bcf5ef5d240)
 
 3. Il bottone Exit per la chiusura dell'applicazione
+
 ![BP_Widget_ButtonExit](https://github.com/user-attachments/assets/29ddca9c-b660-4c99-bff3-1e77e63754c9)
 
-4. Il bottone Conferma che nasconde il pannello dei metahuman e apre quello per la scelta delle animazioni,
+5. Il bottone Conferma che nasconde il pannello dei metahuman e apre quello per la scelta delle animazioni,
    dell'ambiente e il momento della giornata.
 ![BP_Widget_ButtonConferma](https://github.com/user-attachments/assets/83a7ec20-d72d-43f8-9281-f86773c39a26)
 
-5. Slider che gestisce il momento della giornata, Mattino->Giorno->Sera e viceversa.
+6. Slider che gestisce il momento della giornata, Mattino->Giorno->Sera e viceversa.
    Lo slider ha un range di valore che va da 0 a 2. 0->Mattino; 1->Giorno; 2->Sera;
 ![BP_Widget_SunNightLight](https://github.com/user-attachments/assets/ed18615c-09a6-4f62-a46f-9014b21bacba)
 
