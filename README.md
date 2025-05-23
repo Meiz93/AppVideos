@@ -25,8 +25,8 @@ verso l'autovettura in diverse direzioni, in modo da allenare l'AI a riconoscere
    Vengono definiti due valori, 0 per la variabile IndexRight e 4 per la variabile Indexleft.
    IndexRight viene incrementata invece IndexLeft viene decrementata. Con l'input vengono cambiati i valori delle variabili
    consentendo di muoversi verso destra e verso sinistra.
-![BP_Widget_Left](https://github.com/user-attachments/assets/2b2ede9e-20d3-4850-9628-0460d0875045)
-![BP_Widget_Right](https://github.com/user-attachments/assets/a8168176-17e3-41ce-9fdd-5bcf5ef5d240)
+![BP_Widget_Left](https://github.com/user-attachments/assets/9ffff65f-4631-4e21-b726-a4f38f9f9b69)
+![BP_Widget_Right](https://github.com/user-attachments/assets/762e1e57-ded9-47bd-9ad2-7972d0b6d6e6)
 
 3. Il bottone Exit per la chiusura dell'applicazione
 
