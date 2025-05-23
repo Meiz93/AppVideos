@@ -41,7 +41,7 @@ protected:
 
     FName Tag; // TAG PER RIFERIMENTO ALL'AUTOVETTURA
 
-//*** VARIABILI PER LE POSIZIONI ***
+//******************* VARIABILI PER LE POSIZIONI *******************************************************************************
     UPROPERTY(BlueprintReadOnly)
     FVector HousePosMetahuman; // POSZIONE METAHUMAN IN CASA
 
@@ -54,18 +54,21 @@ protected:
     UPROPERTY(BlueprintReadOnly)
     FVector UrbanPosHatchback; // POSIOZNE AUTOVETTURA AMBIENTE URBANO
 
-    FVector StartPosition; // POSIZIONE NEL BEGIN PLAY
+    TArray<FVector> Positions; // ARRAY CHE CONTIENE LE POSIZIONI
 
-    FVector TPPos; // VARIABILE PER MEMORIZZARE LA POSIZIONE DEL METAHUMAN
+    FVector TPPos; // VARIABILE DEL TARGET POINT
 
     FVector CheckPosition; // VARIABILE PER L'ACCESSO ALLA POSIZIONE DEL METAHUMAN
-    
-    FVector Pos; // POSIZIONE DELLO SPAWN
+
+    FVector Position; // VARIABILE PER CAMBIARE POSIZIONE IN BASE A HOUSE O URBAN
     
     FRotator Rot; // ROTAZIONE DELLO SPAWN
     
-    FVector RightCameraPosition; // POSIZIONE DEL METAHUMAN RISPETTO ALLA DASHCAMERA DI DESTRA
-
+    // POSIZIONI DEL METAHUMAN RISPETTO ALLE DASHCAM
+    FVector RightCameraPosition; 
+    FVector LeftCameraPosition;
+    FVector FrontCameraPosition;
+    FVector BackCameraPosition;
     //*************************************************************************************************************************
     
     ACharacter* CurrentMetahuman; // VARIABILE PER IL PASSAGGIO DEL METAHUMAN
@@ -75,7 +78,22 @@ protected:
     TArray<USkeletalMeshComponent*> ComponentsArray; // ARRAY DI SKELETAL MESH COMPONENT
     AAIController* AIController; // VARIABILE PER RIFERIMENTO AI CONTROLLER
 
-    //***************************************************** BINDING AI BOTTONI *************************************************
+    //************************************** RIFERIMENTI BOTTONI ANIMAZIONI **************************************************
+    UPROPERTY(meta = (BindWidget)) // ESEGUE IL BINDING SUL BOTTONE CHIAMATO Walk_1
+        UButton* Walk_1;
+
+    //************************************** FUNZIONI ANIMAZIONI E CAMBIO ZONA ***********************************************
+    UFUNCTION()
+    void OnClickedWalk_1(); // PARTE L'ANIMAZIONE Walk_1 QUANDO VIENE PREMUTO IL BOTTONE WALK_1
+
+    UFUNCTION()
+    void UrbanPosition(); // CAMBIA POSIZIONE DEL METAHUMAN E DELL'AUTOVETTURA NELLA ZONA URBANA
+
+    UFUNCTION()
+    void HousePosition(); // CAMBIA POSIZIONE DEL METAHUMAN E DELL'AUTOVETTURA NELLA ZONA RESIDENZIALE
+    //***********************************************************************************************************************
+    
+    //***************************************************** BINDING AI BOTTONI **********************************************
     
     UPROPERTY(meta = (BindWidget))
     UButton* Button_HousePos;
@@ -335,18 +353,4 @@ protected:
 
     UFUNCTION()
     void OnClickedViviana();
-
-    //************************************** RIFERIMENTI BOTTONI ANIMAZIONI **************************************************
-    UPROPERTY(meta = (BindWidget)) // ESEGUE IL BINDING SUL BOTTONE CHIAMATO Walk_1
-    UButton* Walk_1;
-
-    //************************************** FUNZIONI ANIMAZIONI E CAMBIO ZONA ***********************************************
-    UFUNCTION()
-    void OnClickedWalk_1(); // PARTE L'ANIMAZIONE Walk_1 QUANDO VIENE PREMUTO IL BOTTONE WALK_1
-
-    UFUNCTION()
-    void UrbanPosition(); // CAMBIA POSIZIONE DEL METAHUMAN E DELL'AUTOVETTURA NELLA ZONA URBANA
-
-    UFUNCTION()
-    void HousePosition(); // CAMBIA POSIZIONE DEL METAHUMAN E DELL'AUTOVETTURA NELLA ZONA RESIDENZIALE
 };
