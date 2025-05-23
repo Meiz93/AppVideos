@@ -53,19 +53,24 @@ void UCPPMenuTekke::NativeConstruct()
     Walk_1->OnClicked.AddDynamic(this, &UCPPMenuTekke::OnClickedWalk_1);
 
     //*****************************************************************************************************************************
-    //***************************************** ALTRI BOTTONI **********************************************************
+    //***************************************** ALTRI BOTTONI *********************************************************************
     Button_UrbanPos->OnClicked.AddDynamic(this, &UCPPMenuTekke::UrbanPosition);
     Button_HousePos->OnClicked.AddDynamic(this, &UCPPMenuTekke::HousePosition);
     //*****************************************************************************************************************************
-
-    Tag = TEXT("Car");
-    Rot = FRotator(0.0f, -62.0f, 0.0f);
+    //************** Posizioni Metahuman e HatchBack ****************************************************************************
     RightCameraPosition = FVector(-3528.0f, 677.0f, 90.0);
+    LeftCameraPosition = FVector(1109.0f, -4171.0f, 92.0f);
+    BackCameraPosition = FVector(1109.0f, -4642.0f, 92.0f);
+    FrontCameraPosition = FVector(-520.0f, -3370.0f, 92.0f);
     HousePosHatchback = FVector(630.0f, 9660.0f, -10); 
-    HousePosMetahuman = FVector(468.0f, 9000.0f, 92.0f);
+    HousePosMetahuman = FVector(468.0f, 9000.0f, 75.0f);
     UrbanPosHatchback = FVector(-170.0f, -4526.0f, -15.0f);
     UrbanPosMetahuman = FVector(-520.0f, -3370.0f, 92.0f);
-    StartPosition = FVector(428.0f, 9000.0f, 92.0f);
+    Rot = FRotator(0.0f, -62.0f, 0.0f);
+    //*****************************************************************************************************************************
+
+    // Tag dell'autovettura
+    Tag = TEXT("Car");
 
     // ESEGUE IL CAST SUL BP_MetahumansManager PRESENTE NELLA SCENA E SUI ACTOR CON TAG "Car"
     Metahuman = Cast<AMetahumansManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AMetahumansManager::StaticClass()));
@@ -73,50 +78,75 @@ void UCPPMenuTekke::NativeConstruct()
     HatchbackRef = FoundActors[0];
     
     // SPAWNA IL PRIMO ELEMENTO DELL'ARRAY DI METAHUMAN
-    MetahumanActiveRef = GetWorld()->SpawnActor<ACharacter>(Metahuman->MetahumanArray[0], StartPosition, Rot);
+    MetahumanActiveRef = GetWorld()->SpawnActor<ACharacter>(Metahuman->MetahumanArray[0], HousePosMetahuman, Rot);
 
     // ESEGUE IL CAST SUL Target Point PRESENTE IN SCENA
     TargetPoint = Cast<ATargetPoint>(UGameplayStatics::GetActorOfClass(GetWorld(), ATargetPoint::StaticClass()));
     TPPos = TargetPoint->GetActorLocation();
 
-    
+    // Definito L'array delle posizioni
+    Positions = {HousePosMetahuman,UrbanPosMetahuman,RightCameraPosition,LeftCameraPosition,BackCameraPosition,FrontCameraPosition};
 }
 
 
-void UCPPMenuTekke::OnClickedWalk_1()
+void UCPPMenuTekke::OnClickedWalk_1() // Parte l'animazione di camminata Walk_1
+{
+    // Esegue il cast sul AI Controller e il SkeletalMeshComponent
+    AIController = Cast<AAIController>(MetahumanActiveRef->GetController());
+    MetahumanActiveRef->GetComponents<USkeletalMeshComponent>(ComponentsArray);
+    SkeletalMeshComponent = ComponentsArray[1];
+
+    // Controlla la posizione del Metahuman
+    CheckPosition = MetahumanActiveRef->GetActorLocation();
+
+    // Per ogni elemento dell'array Positions controlla se sono uguali a CheckPosition  
+    for (const FVector& Pos : Positions)
+    {
+        if (CheckPosition.Equals(Pos, 5.0f)) // Nel caso True parte l'animazione
+        {
+            SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
+            AIController->MoveToActor(TargetPoint);
+            Position = Pos;
+        }
+        else // Nel caso False ferma animazione e movimento, resetta la posizione e fa ripartire 
+        {
+            SkeletalMeshComponent->Stop();
+            SkeletalMeshComponent->SetAnimation(nullptr);
+            AIController->StopMovement();
+            MetahumanActiveRef->SetActorLocationAndRotation(Position, FRotator(0.0, 80.0, 0.0));
+            SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
+            AIController->MoveToActor(TargetPoint);
+        }
+    }
+}
+
+// Funzione che spwana il Metahuman e Hactback in postazione Urbana
+void UCPPMenuTekke::UrbanPosition()
 {
     AIController = Cast<AAIController>(MetahumanActiveRef->GetController());
     MetahumanActiveRef->GetComponents<USkeletalMeshComponent>(ComponentsArray);
     SkeletalMeshComponent = ComponentsArray[1];
-    CheckPosition = MetahumanActiveRef->GetActorLocation();
-    TPPos = CheckPosition;
-    
-    if (CheckPosition != TPPos)
-    {
-        SkeletalMeshComponent->Stop();
-        AIController->StopMovement();
-        SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
-        AIController->MoveToActor(TargetPoint);
-    }
-    else
-    {
-        SkeletalMeshComponent->PlayAnimation(Metahuman->AnimsArray[0], true);
-        AIController->MoveToActor(TargetPoint);
-    }
-}
-
-void UCPPMenuTekke::UrbanPosition()
-{
+    SkeletalMeshComponent->Stop();
+    SkeletalMeshComponent->SetAnimation(nullptr);
+    AIController->StopMovement();
     MetahumanActiveRef->SetActorLocationAndRotation(UrbanPosMetahuman, FRotator(0.0f, 80.0f, 0.0f));
     HatchbackRef->SetActorLocationAndRotation(UrbanPosHatchback, FRotator(0.0f, 142.0f, 0.0f));
 }
 
+// Funzione che spwana il Metahuman e Hactback in postazione Residenziale
 void UCPPMenuTekke::HousePosition()
 {
+    AIController = Cast<AAIController>(MetahumanActiveRef->GetController());
+    MetahumanActiveRef->GetComponents<USkeletalMeshComponent>(ComponentsArray);
+    SkeletalMeshComponent = ComponentsArray[1];
+    SkeletalMeshComponent->Stop();
+    SkeletalMeshComponent->SetAnimation(nullptr);
+    AIController->StopMovement();
     MetahumanActiveRef->SetActorLocationAndRotation(HousePosMetahuman, FRotator(0.0, 80.0, 0.0));
     HatchbackRef->SetActorLocationAndRotation(HousePosHatchback, FRotator(0.0f, -90.0f, 0.0f));
 }
 
+// Premuto il bottone elimina il Metahuman precedende e spwana quello nuovo in base a index
 void UCPPMenuTekke::OnClickedAlessandro()
 {
     Index = 0;
